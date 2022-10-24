@@ -17,6 +17,7 @@ import Logo from '../../assets/images/logo.svg';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { BottomText } from '../../components/TextBottom';
 
 const DATA1 = [
   'Todos',
@@ -111,6 +112,7 @@ export const Menu: React.FC = () => {
       ) : (
         <LoadingPencil />
       )}
+      <BottomText />
     </Container>
   );
 };
