@@ -1,16 +1,16 @@
 import React from 'react';
-import { BackGround } from './styles';
+import BackGroundImage from '../../assets/images/Background.svg';
+import { Dimensions } from 'react-native';
+import { ContainerBackground } from './styles';
 
-interface Props {
-  children: unknown;
-}
+const height = Dimensions.get('screen').height;
+const width = Dimensions.get('screen').width;
+const viewBox = '123 10 ' + width + ' ' + height;
 
-export const BodyScreen: React.FC<Props> = ({ children }) => {
+export const BodyScreen: React.FC = () => {
   return (
-    <BackGround
-      source={require('../../assets/images/layer1.png')}
-      resizeMode="cover">
-      {children}
-    </BackGround>
+    <ContainerBackground>
+      <BackGroundImage viewBox={viewBox} width={width} height={height} />
+    </ContainerBackground>
   );
 };

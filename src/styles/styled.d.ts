@@ -5,11 +5,14 @@ declare module 'styled-components' {
     title: string;
 
     colors: {
-      Primary: string;
-      Secundary: string;
-
-      Inverted: string;
-      Text: string;
+      White: string;
+      SecundaryWhite: string;
+      Black: string;
+      SecundaryBlack: string;
+      Blue: string;
+      Gray: string;
+      Red: string;
+      Green: string;
     };
   }
 }

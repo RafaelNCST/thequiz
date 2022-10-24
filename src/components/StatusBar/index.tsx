@@ -6,6 +6,9 @@ export const StatusBarApp = () => {
   const theme = useTheme();
 
   return (
-    <StatusBar backgroundColor={theme.colors.Primary} barStyle="dark-content" />
+    <StatusBar
+      backgroundColor={theme.colors.SecundaryBlack}
+      barStyle="light-content"
+    />
   );
 };
