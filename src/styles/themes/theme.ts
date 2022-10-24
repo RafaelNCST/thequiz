@@ -2,10 +2,13 @@ export default {
   title: 'main',
 
   colors: {
-    Primary: '#2D2F60',
-    Secundary: '#42E2B8',
-
-    Inverted: '#363636',
-    Text: '#363636',
+    White: '#ffffff',
+    SecundaryWhite: '#F4F3F1',
+    Black: '#000000',
+    SecundaryBlack: '#363636',
+    Blue: '#325AA4',
+    Gray: '#BFB3B3',
+    Red: '#C12626',
+    Green: '#09CB85',
   },
 };

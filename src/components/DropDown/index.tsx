@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Animated } from 'react-native';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   DropDownContainer,
   DropDownSubContainer,
@@ -8,34 +8,32 @@ import {
   Option,
   TextSelected,
   TextDropDown,
+  ContainerSelected,
 } from './styles';
 
-interface PropsData {
-  name: string;
-}
-
 interface Props {
-  Data: Array<PropsData>;
+  Data: Array<string>;
   zIndex?: number;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOtherDropDown: Dispatch<SetStateAction<boolean>>;
+  placeholder: string;
+  optionChoosed: Dispatch<SetStateAction<string | null>>;
 }
 
-export const DropDown: React.FC<Props> = ({ Data, zIndex }) => {
-  const placeholder: string = 'Selecione algo ai poh pra começar';
-
-  const sizeDropDown = useRef(new Animated.Value(0)).current;
+export const DropDown: React.FC<Props> = ({
+  Data,
+  zIndex,
+  open,
+  setOpen,
+  setOtherDropDown,
+  placeholder,
+  optionChoosed,
+}) => {
   const [firstRun, setFirstRun] = useState<boolean>(true);
   const [selected, setSelected] = useState<string | null>(null);
-  const [open, setOpen] = useState<boolean>(false);
   const [dataSize, setDataSize] = useState(Data.length);
-
-  const handleDropDrown = (value: boolean) => {
-    const toValue = !value ? 0 : 1;
-    Animated.timing(sizeDropDown, {
-      toValue,
-      duration: 400,
-      useNativeDriver: false,
-    }).start();
-  };
+  const [controlHeight, setControlHeight] = useState<number>(0);
 
   const handleOptionsNumberDropDown = () => {
     setDataSize(prev => prev - 1);
@@ -43,37 +41,48 @@ export const DropDown: React.FC<Props> = ({ Data, zIndex }) => {
 
   const handleSelectedOption = (item: string) => {
     setSelected(item);
+    optionChoosed(item);
     setFirstRun(false);
     setOpen(false);
     handleOptionsNumberDropDown();
   };
 
-  const sizeInterpolate = sizeDropDown.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, dataSize < 4 ? 150 : 200],
-  });
-
   useEffect(() => {
-    handleDropDrown(open);
+    if (open) {
+      setControlHeight(
+        dataSize < Data.length ? (Data.length - 1) * 40 : Data.length * 40,
+      );
+    } else {
+      setControlHeight(0);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
     <DropDownContainer zIndex={zIndex}>
       <Selected
-        onPress={() => setOpen(prev => !prev)}
+        borderRadius={controlHeight === 0 ? '12px' : '0px'}
+        onPress={() => {
+          setOtherDropDown(false);
+          setOpen(prev => !prev);
+        }}
         activeOpacity={0.8}
         underlayColor="#cac8c8">
-        <TextSelected color={firstRun ? '#9e9d9d' : '#363636'}>
-          {firstRun ? placeholder : selected}
-        </TextSelected>
+        <ContainerSelected>
+          <TextSelected color={firstRun ? '#9e9d9d' : '#363636'}>
+            {firstRun ? placeholder : selected}
+          </TextSelected>
+          <Icon name="keyboard-arrow-down" size={20} color={'#000'} />
+        </ContainerSelected>
       </Selected>
-      <DropDownSubContainer style={{ height: sizeInterpolate }}>
+      <DropDownSubContainer
+        border={open ? '1px' : '0px'}
+        style={{ height: controlHeight }}>
         <FlatList
           data={Data}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
-            if (item.name === selected) {
+            if (item === selected) {
               return null;
             }
 
@@ -83,8 +92,8 @@ export const DropDown: React.FC<Props> = ({ Data, zIndex }) => {
                 underlayColor="#cac8c8"
                 sizeBorderRadius={index === Data.length - 1 ? '12px' : '0px'}
                 key={index}
-                onPress={() => handleSelectedOption(item.name)}>
-                <TextDropDown>{item.name}</TextDropDown>
+                onPress={() => handleSelectedOption(item)}>
+                <TextDropDown>{item}</TextDropDown>
               </Option>
             );
           }}
