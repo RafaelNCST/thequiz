@@ -10,7 +10,7 @@ import {
   SubContainer,
 } from './styles';
 import { LoadingPencil } from '../../components/LoadingPencil';
-import { TextSubTitle, TextTitle } from '../../styles/globalStyles';
+import { TextButton, TextTitle } from '../../styles/globalStyles';
 import { DropDown } from '../../components/DropDown';
 import { ModalHowPlay } from './components/ModalHowPlay';
 import Logo from '../../assets/images/logo.svg';
@@ -100,10 +100,10 @@ export const Menu: React.FC = () => {
                 <ModalHowPlay setOpen={setOpenModalHowPlay} />
               </Modal>
               <ButtonMenu onPress={handlerHowPlay}>
-                <TextSubTitle>COMO JOGAR</TextSubTitle>
+                <TextButton>COMO JOGAR</TextButton>
               </ButtonMenu>
               <ButtonMenu onPress={handlerPlay}>
-                <TextSubTitle>JOGAR</TextSubTitle>
+                <TextButton>JOGAR</TextButton>
               </ButtonMenu>
             </ContainerButtons>
           </ContainerMenu>

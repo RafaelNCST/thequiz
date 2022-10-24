@@ -7,6 +7,7 @@ export default {
     Black: '#000000',
     SecundaryBlack: '#363636',
     Blue: '#325AA4',
+    SecundaryBlue: '#0026AD',
     Gray: '#BFB3B3',
     Red: '#C12626',
     Green: '#09CB85',

@@ -1,21 +1,21 @@
 import styled from 'styled-components/native';
 import responsive from './themes/responsive';
 
-interface PropsImage {
+interface styledProps {
   width?: string;
   height?: string;
   color?: string;
 }
 
 export const TextSuperTitle = styled.Text`
-  color: ${({ theme }) => theme.colors.Text};
+  color: ${({ theme }) => theme.colors.Black};
   font-family: 'Inter-ExtraBold';
   font-size: ${responsive.G};
   text-align: center;
   line-height: 20px;
 `;
 
-export const TextTitle = styled.Text<PropsImage>`
+export const TextTitle = styled.Text<styledProps>`
   color: ${({ color }) => color};
   font-family: 'VerySimpleChalk';
   font-size: ${responsive.UEG};
@@ -29,7 +29,19 @@ export const TextTitle = styled.Text<PropsImage>`
 export const TextSubTitle = styled.Text`
   color: ${({ theme }) => theme.colors.Black};
   font-family: 'VerySimpleChalk';
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: ${responsive.EG};
+  text-align: center;
+  line-height: 20px;
+`;
+
+export const TextButton = styled.Text<styledProps>`
+  color: ${({ theme }) => theme.colors.Black};
+  font-family: 'VerySimpleChalk';
   font-size: ${responsive.MG};
+  padding-top: 10px;
   text-align: center;
   line-height: 20px;
 `;
@@ -42,7 +54,7 @@ export const TextRegular = styled.Text`
   line-height: 20px;
 `;
 
-export const Image = styled.Image<PropsImage>`
+export const Image = styled.Image<styledProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 `;
