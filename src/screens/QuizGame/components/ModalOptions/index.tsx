@@ -1,14 +1,24 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import {
   BodyModal,
   Content,
   Pin,
   ContainerPin,
 } from '../../../../styles/stylesModal';
-import { SoundArea, ContainerImage, ContentButtons } from './styles';
+import { Modal } from 'react-native';
+import {
+  SoundArea,
+  ContainerImage,
+  ContentButtons,
+  IconButton,
+  TextSound,
+} from './styles';
 import Logo from '../../../../assets/images/logo.svg';
 import { ButtonTransparent } from '../../../../components/ButtonTransparent';
-import { TextSubTitle } from '../../../../styles/globalStyles';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../../routes/types';
+import { ModalWarning } from '../../../../components/ModalWarning';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
@@ -16,8 +26,28 @@ interface Props {
 }
 
 export const ModalOptions: React.FC<Props> = ({ setModal }) => {
+  const [sound, setSound] = useState<boolean>(true);
+  const [showModalWarning, setShowModalWarning] = useState<boolean>(false);
+
+  const { reset } = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const handlerActionBack = () => {
     setModal(false);
+  };
+
+  const handlerBackMenu = () => {
+    reset({
+      index: 0,
+      routes: [{ name: 'MenuScreen' }],
+    });
+  };
+
+  const handleSound = () => {
+    setSound(prev => !prev);
+  };
+
+  const handlerModalWarning = () => {
+    setShowModalWarning(true);
   };
 
   return (
@@ -37,11 +67,25 @@ export const ModalOptions: React.FC<Props> = ({ setModal }) => {
           />
           <ButtonTransparent
             textContent="MENU"
-            actionFunction={() => console.log('rusbé')}
+            actionFunction={handlerModalWarning}
           />
+
+          <Modal visible={showModalWarning} animationType="fade" transparent>
+            <ModalWarning
+              setModal={setShowModalWarning}
+              actionSecondButton={handlerBackMenu}
+            />
+          </Modal>
+
           <SoundArea>
-            <TextSubTitle>ON</TextSubTitle>
-            <Icon name="volume-up" color="#000" size={40} />
+            <TextSound sound={sound}>{sound ? 'ON' : 'OFF'}</TextSound>
+            <IconButton onPress={handleSound}>
+              <Icon
+                name={sound ? 'volume-up' : 'volume-off'}
+                color={sound ? '#000' : '#C12626'}
+                size={40}
+              />
+            </IconButton>
           </SoundArea>
         </ContentButtons>
         <ContainerPin>

@@ -5,6 +5,7 @@ interface styledProps {
   width?: string;
   height?: string;
   color?: string;
+  paddingTOP?: string;
 }
 
 export const TextSuperTitle = styled.Text`
@@ -16,7 +17,7 @@ export const TextSuperTitle = styled.Text`
 `;
 
 export const TextTitle = styled.Text<styledProps>`
-  color: ${({ color }) => color};
+  color: ${({ color, theme }) => color || theme.colors.Black};
   font-family: 'VerySimpleChalk';
   font-size: ${responsive.UEG};
   text-align: center;
@@ -26,7 +27,7 @@ export const TextTitle = styled.Text<styledProps>`
   padding-right: 10px;
 `;
 
-export const TextSubTitle = styled.Text`
+export const TextSubTitle = styled.Text<styledProps>`
   color: ${({ theme }) => theme.colors.Black};
   font-family: 'VerySimpleChalk';
   padding-top: 20px;
@@ -40,8 +41,7 @@ export const TextSubTitle = styled.Text`
 export const TextPresentation = styled.Text<styledProps>`
   color: ${({ theme }) => theme.colors.Black};
   font-family: 'VerySimpleChalk';
-  font-size: ${responsive.MG};
-  padding-top: 10px;
+  font-size: 16px;
   text-align: center;
   line-height: 20px;
   z-index: 2;

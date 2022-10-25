@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import responsive from '../../styles/themes/responsive';
 
 export const ContainerMenssager = styled.View`
   position: absolute;
@@ -11,10 +10,11 @@ export const ContainerMenssager = styled.View`
   border-radius: 10px;
   bottom: 2%;
   elevation: 10;
+  z-index: -1;
 `;
 
 export const ContainerText = styled.Text`
-  font-size: ${responsive.MPG};
+  font-size: 15px;
   font-family: 'VerySimpleChalk';
   color: ${({ theme }) => theme.colors.Black};
 `;

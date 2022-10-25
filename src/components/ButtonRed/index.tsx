@@ -7,10 +7,7 @@ interface Props {
   actionFunction: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ButtonGreen: React.FC<Props> = ({
-  textContent,
-  actionFunction,
-}) => {
+export const ButtonRed: React.FC<Props> = ({ textContent, actionFunction }) => {
   return (
     <ButtonContainer onPress={() => actionFunction(false)}>
       <TextPresentation>{textContent}</TextPresentation>

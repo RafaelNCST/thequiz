@@ -10,7 +10,7 @@ import {
   SubContainer,
 } from './styles';
 import { LoadingPencil } from '../../components/LoadingPencil';
-import { TextPresentation, TextTitle } from '../../styles/globalStyles';
+import { TextRegular, TextTitle } from '../../styles/globalStyles';
 import { DropDown } from '../../components/DropDown';
 import { ModalHowPlay } from './components/ModalHowPlay';
 import Logo from '../../assets/images/logo.svg';
@@ -21,7 +21,7 @@ import { BottomText } from '../../components/BottomText';
 
 const DATA1 = [
   'Todos',
-  'História da Computação',
+  'História Do TI',
   'Lógica e Algoritmos',
   'Gestão de Projetos',
 ];
@@ -102,10 +102,10 @@ export const Menu: React.FC = () => {
               </Modal>
 
               <ButtonMenu onPress={handlerHowPlay}>
-                <TextPresentation>COMO JOGAR</TextPresentation>
+                <TextRegular>COMO JOGAR</TextRegular>
               </ButtonMenu>
               <ButtonMenu onPress={handlerPlay}>
-                <TextPresentation>JOGAR</TextPresentation>
+                <TextRegular>JOGAR</TextRegular>
               </ButtonMenu>
             </ContainerButtons>
           </ContainerMenu>
