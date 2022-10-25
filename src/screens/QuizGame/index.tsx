@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { BodyScreen } from '../../styles/backgroundImage';
 import { Modal } from 'react-native';
 import { ModalOptions } from './components/ModalOptions';
+import { TipsModal } from './components/TipsModal';
+
 import {
   TextRegular,
   TextSubTitle,
@@ -22,6 +24,7 @@ import {
   Marker,
   ContainerLifes,
   Tips,
+  ConfigTipsButton,
   ContainerMarker,
   ConfigButton,
   SubContainerHeart,
@@ -38,6 +41,7 @@ export const QuizGame = () => {
     useRoute<RouteProp<RootStackParamList>>()?.params || {};
 
   const [showModalOption, setShowModalOptions] = useState<boolean>(false);
+  const [showTipsModal, setShowTipsModal] = useState<boolean>(false);
   const [selected, setSelected] = useState<number | null>(null);
   const [correct, setCorrect] = useState<number | null>(null);
   const [endRound, setEndRound] = useState<boolean>(false);
@@ -71,6 +75,7 @@ export const QuizGame = () => {
           <TextSubTitle>{theme}</TextSubTitle>
         </TitleBar>
       </ContainerTitle>
+
       <ContainerUtils>
         <ContainerMarker>
           <TextPresentation>TEMPO: 1:00</TextPresentation>
@@ -114,7 +119,12 @@ export const QuizGame = () => {
           </SubContainerHeart>
         </ContainerLifes>
         <Tips>
-          <TextRegular>DICA</TextRegular>
+          <Tips onPress={() => setShowTipsModal(true)}>
+            <TextRegular>DICA</TextRegular>
+          </Tips>
+          <Modal visible={showTipsModal} animationType="fade" transparent>
+            <TipsModal setModal={setShowTipsModal} />
+          </Modal>
         </Tips>
       </ContainerUtils>
       <ContainerMain>
@@ -125,8 +135,8 @@ export const QuizGame = () => {
         />
         <ContainerText>
           <TextMain>
-            O batata é um cara muito bobão, ele gosta do gordinho, mas o
-            gordinho não sabe, e agora o que batata fará.
+            Nome dado ao diagrama usado para ilustrar o avanço das diferentes
+            etapas de um projeto
           </TextMain>
         </ContainerText>
       </ContainerMain>

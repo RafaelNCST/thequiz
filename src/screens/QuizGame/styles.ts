@@ -42,6 +42,12 @@ export const ContainerMarker = styled.View`
   justify-content: center;
 `;
 
+export const ConfigTipsButton = styled.TouchableOpacity`
+  background-color: ${({ theme }) => theme.colors.Gray};
+  z-index: 2;
+  justify-content: center;
+`;
+
 export const ConfigButton = styled.TouchableOpacity`
   width: 35px;
   height: 35px;

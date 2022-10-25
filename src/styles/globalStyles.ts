@@ -40,10 +40,21 @@ export const TextSubTitle = styled.Text`
 export const TextPresentation = styled.Text<styledProps>`
   color: ${({ theme }) => theme.colors.Black};
   font-family: 'VerySimpleChalk';
-  font-size: ${responsive.MG};
-  padding-top: 10px;
+  font-size: ${responsive.MPG};
+  padding-top: 5px;
   text-align: center;
   line-height: 20px;
+  z-index: 2;
+`;
+
+export const TextPresentationDica = styled.Text<styledProps>`
+  color: ${({ theme }) => theme.colors.Green};
+  font-family: 'VerySimpleChalk';
+  font-size: ${responsive.MG};
+  padding-top: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin-bottom: 10px;
   z-index: 2;
 `;
 
