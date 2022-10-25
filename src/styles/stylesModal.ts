@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface styledProps {
+  height: string;
+}
+
 export const BodyModal = styled.View`
   flex: 1;
   width: 100%;
@@ -7,8 +11,8 @@ export const BodyModal = styled.View`
   justify-content: center;
   align-items: center;
 `;
-export const Content = styled.View`
-  height: 70%;
+export const Content = styled.View<styledProps>`
+  height: ${({ height }) => height};
   width: 80%;
   background-color: ${({ theme }) => theme.colors.SecundaryWhite};
   justify-content: space-between;

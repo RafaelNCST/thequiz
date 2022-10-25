@@ -5,6 +5,7 @@ export default {
   P: `${RFPercentage(1.5)}px`, //12px
   PM: `${RFPercentage(1.75)}px`, //14px
   M: `${RFPercentage(2)}px`, //16px
+  MPG: `${RFPercentage(2.2)}px`,
   MG: `${RFPercentage(2.5)}px`, //20px
   G: `${RFPercentage(3)}px`, //24px
   EG: `${RFPercentage(4)}px`, //32px

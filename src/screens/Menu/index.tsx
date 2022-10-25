@@ -10,14 +10,14 @@ import {
   SubContainer,
 } from './styles';
 import { LoadingPencil } from '../../components/LoadingPencil';
-import { TextButton, TextTitle } from '../../styles/globalStyles';
+import { TextPresentation, TextTitle } from '../../styles/globalStyles';
 import { DropDown } from '../../components/DropDown';
 import { ModalHowPlay } from './components/ModalHowPlay';
 import Logo from '../../assets/images/logo.svg';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { BottomText } from '../../components/TextBottom';
+import { BottomText } from '../../components/BottomText';
 
 const DATA1 = [
   'Todos',
@@ -100,11 +100,12 @@ export const Menu: React.FC = () => {
                 transparent>
                 <ModalHowPlay setOpen={setOpenModalHowPlay} />
               </Modal>
+
               <ButtonMenu onPress={handlerHowPlay}>
-                <TextButton>COMO JOGAR</TextButton>
+                <TextPresentation>COMO JOGAR</TextPresentation>
               </ButtonMenu>
               <ButtonMenu onPress={handlerPlay}>
-                <TextButton>JOGAR</TextButton>
+                <TextPresentation>JOGAR</TextPresentation>
               </ButtonMenu>
             </ContainerButtons>
           </ContainerMenu>

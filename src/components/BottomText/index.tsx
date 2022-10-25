@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerMenssager, ContainerText } from './styled';
+import { ContainerMenssager, ContainerText } from './styles';
 
 export const BottomText = () => {
   return (

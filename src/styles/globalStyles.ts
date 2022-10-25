@@ -37,13 +37,14 @@ export const TextSubTitle = styled.Text`
   line-height: 20px;
 `;
 
-export const TextButton = styled.Text<styledProps>`
+export const TextPresentation = styled.Text<styledProps>`
   color: ${({ theme }) => theme.colors.Black};
   font-family: 'VerySimpleChalk';
   font-size: ${responsive.MG};
   padding-top: 10px;
   text-align: center;
   line-height: 20px;
+  z-index: 2;
 `;
 
 export const TextRegular = styled.Text`

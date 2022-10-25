@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BodyScreen } from '../../styles/backgroundImage';
+import { Modal } from 'react-native';
+import { ModalOptions } from './components/ModalOptions';
 import {
   TextRegular,
   TextSubTitle,
   Image,
-  TextButton,
+  TextPresentation,
 } from '../../styles/globalStyles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Container,
   ContainerTitle,
@@ -16,16 +19,48 @@ import {
   ContainerText,
   TextMain,
   Option,
+  Marker,
+  ContainerLifes,
+  Tips,
+  ContainerMarker,
+  ConfigButton,
+  SubContainerHeart,
 } from './styles';
 import { useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/types';
+import LottieView from 'lottie-react-native';
 
 const DATA = ['GANTT', 'GUSTAVO', 'GRANTT', 'GANT'];
 
 export const QuizGame = () => {
   const { theme, time } =
     useRoute<RouteProp<RootStackParamList>>()?.params || {};
+
+  const [showModalOption, setShowModalOptions] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [correct, setCorrect] = useState<number | null>(null);
+  const [endRound, setEndRound] = useState<boolean>(false);
+
+  const controlFirstHeart = useRef();
+  const controlSecondHeart = useRef();
+  const controlThirdHeart = useRef();
+
+  const handlerWrongResponse = (item: number) => {
+    if (item === 0) {
+      controlFirstHeart?.current?.play(144, 0);
+    } else if (item === 1) {
+      controlSecondHeart?.current?.play(144, 0);
+    } else if (item === 2) {
+      controlThirdHeart?.current?.play(144, 0);
+    }
+  };
+
+  useEffect(() => {
+    controlFirstHeart.current.play(144, 144);
+    controlSecondHeart.current.play(144, 144);
+    controlThirdHeart.current.play(144, 144);
+  }, []);
 
   return (
     <Container>
@@ -36,7 +71,52 @@ export const QuizGame = () => {
           <TextSubTitle>{theme}</TextSubTitle>
         </TitleBar>
       </ContainerTitle>
-      <ContainerUtils></ContainerUtils>
+      <ContainerUtils>
+        <ContainerMarker>
+          <TextPresentation>TEMPO: 1:00</TextPresentation>
+
+          <Modal visible={showModalOption} animationType="fade" transparent>
+            <ModalOptions setModal={setShowModalOptions} />
+          </Modal>
+
+          <ConfigButton onPress={() => setShowModalOptions(true)}>
+            <Icon name="settings" size={25} color="#000" />
+          </ConfigButton>
+          <Marker source={require('../../assets/images/marker.png')} />
+        </ContainerMarker>
+        <ContainerLifes>
+          <SubContainerHeart>
+            <LottieView
+              source={require('../../assets/lottie/Heart.json')}
+              resizeMode="cover"
+              loop={false}
+              autoPlay={false}
+              ref={controlFirstHeart}
+            />
+          </SubContainerHeart>
+          <SubContainerHeart>
+            <LottieView
+              source={require('../../assets/lottie/Heart.json')}
+              resizeMode="cover"
+              loop={false}
+              autoPlay={false}
+              ref={controlSecondHeart}
+            />
+          </SubContainerHeart>
+          <SubContainerHeart>
+            <LottieView
+              source={require('../../assets/lottie/Heart.json')}
+              resizeMode="cover"
+              loop={false}
+              autoPlay={false}
+              ref={controlThirdHeart}
+            />
+          </SubContainerHeart>
+        </ContainerLifes>
+        <Tips>
+          <TextRegular>DICA</TextRegular>
+        </Tips>
+      </ContainerUtils>
       <ContainerMain>
         <Image
           source={require('../../assets/images/paper.png')}
@@ -50,10 +130,15 @@ export const QuizGame = () => {
           </TextMain>
         </ContainerText>
       </ContainerMain>
+
       <ContainerOptions>
         {DATA.map((item, index) => {
           return (
-            <Option key={index}>
+            <Option
+              key={index}
+              disabled={endRound ? true : false}
+              selected={correct === index ? true : false}
+              noSelected={selected !== index ? true : false}>
               <TextSubTitle>{item}</TextSubTitle>
             </Option>
           );
